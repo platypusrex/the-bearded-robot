@@ -16,6 +16,11 @@ class ManageSuppliersPage extends React.Component {
 
 		this.updateSupplierState = this.updateSupplierState.bind(this);
 		this.saveSupplier = this.saveSupplier.bind(this);
+		this.validateFormInputs = this.validateFormInputs.bind(this);
+		this.validatePhoneNumber = this.validatePhoneNumber.bind(this);
+		this.validateEmail = this.validateEmail.bind(this);
+		this.validateRequired = this.validateRequired.bind(this);
+		this.validateZip = this.validateZip.bind(this);
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -28,15 +33,96 @@ class ManageSuppliersPage extends React.Component {
 		const value = event.target.value;
 		const field = event.target.name;
 		let supplier = this.state.supplier;
-
+		this.validateFormInputs(value, field);
 
 		if(field === 'phone' || field === 'zip') {
 			supplier[field] = value.toString();
+		} else if(field === 'state'){
+			supplier[field] = value.toUpperCase();
 		} else {
 			supplier[field] = value;
 		}
 
 		return this.setState({supplier: supplier});
+	}
+
+	updateErrorsState(errors) {
+		this.setState({
+			errors: Object.assign({}, errors)
+		});
+	}
+
+	validateFormInputs(value, field) {
+		switch (field) {
+			case 'name':
+				this.validateRequired(value, field);
+				break;
+			case 'category':
+				this.validateRequired(value, field);
+				break;
+			case 'phone':
+				this.validatePhoneNumber(value);
+				break;
+			case 'email':
+				this.validateEmail(value);
+				break;
+			case 'state':
+				this.validateState(value);
+				break;
+			case 'zip':
+				this.validateZip(value);
+				break;
+		}
+	}
+
+	validateRequired(value, field) {
+		let errors = {};
+		if (value.length < 1) {
+			errors.type = field;
+			errors.message = `${field} is required`;
+		}
+		this.updateErrorsState(errors);
+	}
+
+
+	validatePhoneNumber(phoneNumber) {
+		const validatePhone = /^\d{10}$/;
+		let errors = {};
+		if(validatePhone.test(phoneNumber.toString()) === false) {
+			errors.type = 'phone';
+			errors.message = 'phone number must be 10 digits long';
+		}
+		this.updateErrorsState(errors);
+	}
+
+	validateEmail(emailAddress) {
+		const validateEmail = /(.+)@(.+){2,}\.(.+){2,}/;
+		let errors = {};
+		if(validateEmail.test(emailAddress) === false) {
+			errors.type = 'email';
+			errors.message = 'please enter a valid email address';
+		}
+		this.updateErrorsState(errors);
+	}
+
+	validateState(state) {
+		const validateState = /^[a-zA-Z]{2}$/;
+		let errors = {};
+		if(validateState.test(state) === false) {
+			errors.type = 'state';
+			errors.message = 'please use state abbreviation';
+		}
+		this.updateErrorsState(errors);
+	}
+
+	validateZip(zip) {
+		const validateZip = /^\d{5}?/;
+		let errors = {};
+		if(validateZip.test(zip) === false) {
+			errors.type = 'zip';
+			errors.message = 'please use 5 digit zip';
+		}
+		this.updateErrorsState(errors);
 	}
 
 	saveSupplier(event) {

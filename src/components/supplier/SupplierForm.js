@@ -19,7 +19,7 @@ const SupplierForm = ({supplier, onSave, onChange, errors}) => {
 									placeholder="Name"
 									value={supplier.name}
 									onChange={onChange}
-									error={errors.title}/>
+									errors={errors}/>
 							</div>
 							<div className="col-md-6">
 								<TextInput
@@ -28,7 +28,7 @@ const SupplierForm = ({supplier, onSave, onChange, errors}) => {
 									placeholder="Category"
 									value={supplier.category}
 									onChange={onChange}
-									error={errors.title}/>
+									errors={errors}/>
 							</div>
 						</div>
 						<div className="row">
@@ -39,7 +39,7 @@ const SupplierForm = ({supplier, onSave, onChange, errors}) => {
 									placeholder="Phone"
 									value={supplier.phone.toString()}
 									onChange={onChange}
-									error={errors.title}/>
+									errors={errors}/>
 							</div>
 							<div className="col-md-6">
 								<TextInput
@@ -48,7 +48,7 @@ const SupplierForm = ({supplier, onSave, onChange, errors}) => {
 									placeholder="Email"
 									value={supplier.email}
 									onChange={onChange}
-									error={errors.title}/>
+									errors={errors}/>
 							</div>
 						</div>
 						<h6>Address</h6>
@@ -62,7 +62,7 @@ const SupplierForm = ({supplier, onSave, onChange, errors}) => {
 											placeholder="Delivery Line"
 											value={supplier.deliveryLine}
 											onChange={onChange}
-											error={errors.title}/>
+											errors={errors}/>
 									</div>
 									<div className="col-md-6">
 										<TextInput
@@ -71,7 +71,7 @@ const SupplierForm = ({supplier, onSave, onChange, errors}) => {
 											placeholder="City"
 											value={supplier.city}
 											onChange={onChange}
-											error={errors.title}/>
+											errors={errors}/>
 									</div>
 								</div>
 								<div className="row">
@@ -82,21 +82,21 @@ const SupplierForm = ({supplier, onSave, onChange, errors}) => {
 											placeholder="State"
 											value={supplier.state}
 											onChange={onChange}
-											error={errors.title}/>
+											errors={errors}/>
 									</div>
 									<div className="col-md-6">
 										<TextInput
 											name="zip"
 											label="Zip"
 											placeholder="Zip"
-											value={supplier.zip}
+											value={supplier.zip.toString()}
 											onChange={onChange}
-											error={errors.title}/>
+											errors={errors}/>
 									</div>
 								</div>
 							</div>
 						</div>
-						<button type="submit" onClick={onSave} className="btn btn-outline-primary">Save</button>
+						<button type="submit" disabled={errors && errors.type} onClick={onSave} className="btn btn-outline-primary">Save</button>
 					</form>
 				</div>
 			</div>

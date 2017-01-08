@@ -1,9 +1,10 @@
 import React, {PropTypes} from 'react';
 
-const TextInput = ({name, label, onChange, placeholder, value, error}) => {
+const TextInput = ({name, label, onChange, placeholder, value, errors}) => {
 	let wrapperClass = 'form-group';
 	let inputClass = 'form-control';
-	if(error && error.length > 0) {
+	let errorsPresent = (errors && errors.type === name);
+	if(errorsPresent) {
 		wrapperClass += ' has-danger';
 		inputClass += ' form-control-danger';
 	}
@@ -17,9 +18,8 @@ const TextInput = ({name, label, onChange, placeholder, value, error}) => {
 				className={inputClass}
 				placeholder={placeholder}
 				value={value}
-				onChange={onChange}
-				required={true}/>
-			{error && <div className="form-control-feedback">{error}</div>}
+				onChange={onChange}/>
+			{errorsPresent && <div className="form-control-feedback">{errors.message}</div>}
 		</div>
 	);
 };
@@ -32,7 +32,7 @@ TextInput.propTypes = {
 	type: PropTypes.string,
 	num: PropTypes.number,
 	value: PropTypes.string,
-	error: PropTypes.string
+	errors: PropTypes.object
 };
 
 export default TextInput;
