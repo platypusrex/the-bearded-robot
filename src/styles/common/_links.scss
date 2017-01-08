@@ -1,0 +1,15 @@
+a {
+  transition: all .15s ease-in-out;
+
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+    transition: all .2s ease-in-out;
+  }
+
+  &:active,
+  &:focus {
+    color: orange;
+  }
+}

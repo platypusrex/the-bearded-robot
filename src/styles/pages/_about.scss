@@ -1,0 +1,10 @@
+.info-container {
+  .section-wrapper {
+    max-width: 650px;
+    padding: 10px 0;
+
+    &:first-child {
+      margin-top: 20px;
+    }
+  }
+}

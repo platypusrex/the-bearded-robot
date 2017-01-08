@@ -1,0 +1,41 @@
+.suppliers-page-container {
+  .flex-container {
+    h1 {
+      margin-right: auto;
+    }
+  }
+
+  .card-title {
+    margin: 0;
+
+    .card-header {
+      padding: 8px;
+      border-bottom: none;
+
+      .flex-column {
+        width: 100%;
+      }
+    }
+
+    h4 {
+      margin: 0;
+    }
+
+    select {
+      max-width: 200px;
+      margin-left: auto;
+    }
+  }
+
+  .table-container {
+    margin: 0 auto;
+  }
+
+  .table {
+    font-size: 13px;
+
+    td {
+      vertical-align: middle;
+    }
+  }
+}
