@@ -116,7 +116,7 @@ class ManageSuppliersPage extends React.Component {
 	}
 
 	validateZip(zip) {
-		const validateZip = /^\d{5}?/;
+		const validateZip = /^\d{5}$/;
 		let errors = {};
 		if(validateZip.test(zip) === false) {
 			errors.type = 'zip';

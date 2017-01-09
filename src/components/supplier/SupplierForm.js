@@ -37,7 +37,7 @@ const SupplierForm = ({supplier, onSave, onChange, errors}) => {
 									name="phone"
 									label="Phone"
 									placeholder="Phone"
-									value={supplier.phone.toString()}
+									value={(supplier.phone) ? supplier.phone.toString() : supplier.phone}
 									onChange={onChange}
 									errors={errors}/>
 							</div>
@@ -89,7 +89,7 @@ const SupplierForm = ({supplier, onSave, onChange, errors}) => {
 											name="zip"
 											label="Zip"
 											placeholder="Zip"
-											value={supplier.zip.toString()}
+											value={(supplier.zip) ? supplier.zip.toString() : supplier.zip}
 											onChange={onChange}
 											errors={errors}/>
 									</div>
