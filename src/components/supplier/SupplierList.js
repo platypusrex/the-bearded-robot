@@ -31,7 +31,7 @@ const SupplierList = ({suppliers, categories, onChange, name, value, defaultOpti
 				</thead>
 				<tbody>
 				{suppliers.map(supplier =>
-					(value === supplier.category || !value) && <SupplierRow key={supplier.id} supplier={supplier} onClick={deleteSupplier} />
+					(value === supplier.category || !value) && <SupplierRow key={supplier._id} supplier={supplier} onClick={deleteSupplier} />
 				)}
 				</tbody>
 			</table>

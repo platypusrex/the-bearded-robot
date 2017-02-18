@@ -166,7 +166,7 @@ ManageSuppliersPage.contextTypes = {
 
 function getSupplierById(suppliers, supplierId) {
 	const supplierNew =  suppliers.filter(supplier => {
-		return supplier.id === supplierId;
+		return supplier._id === supplierId;
 	})[0];
 
 	return (supplierNew) ? supplierNew : null;

@@ -19,12 +19,18 @@ export function deleteSupplierSuccess(supplier) {
 
 export function loadSuppliers() {
 	return function(dispatch) {
-		return supplierApi.getAllSuppliers().then(suppliers => {
-			dispatch(loadSuppliersSuccess(suppliers));
-		}).catch((error) => {
-			throw(error);
-		});
+		return fetch(`http://localhost:3000/suppliers`)
+			.then(res => res.json())
+			.then(suppliers => dispatch(loadSuppliersSuccess(suppliers)));
 	};
+
+	// return function(dispatch) {
+	// 	return supplierApi.getAllSuppliers().then(suppliers => {
+	// 		dispatch(loadSuppliersSuccess(suppliers));
+	// 	}).catch((error) => {
+	// 		throw(error);
+	// 	});
+	// };
 }
 
 export function saveSupplier(supplier) {
