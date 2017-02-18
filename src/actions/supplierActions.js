@@ -21,16 +21,11 @@ export function loadSuppliers() {
 	return function(dispatch) {
 		return fetch(`http://localhost:3000/suppliers`)
 			.then(res => res.json())
-			.then(suppliers => dispatch(loadSuppliersSuccess(suppliers)));
+			.then(suppliers => dispatch(loadSuppliersSuccess(suppliers)))
+			.catch((err) => {
+				throw(err)
+			});
 	};
-
-	// return function(dispatch) {
-	// 	return supplierApi.getAllSuppliers().then(suppliers => {
-	// 		dispatch(loadSuppliersSuccess(suppliers));
-	// 	}).catch((error) => {
-	// 		throw(error);
-	// 	});
-	// };
 }
 
 export function saveSupplier(supplier) {
@@ -48,7 +43,10 @@ export function saveSupplier(supplier) {
 	return function(dispatch) {
 		return fetch(apiUrl, fetchOptions)
 			.then(res => res.json())
-			.then(supplier => (supplier._id) ? dispatch(updateSupplierSuccess(supplier)) : dispatch(createSupplierSuccess(supplier)));
+			.then(supplier => (supplier._id) ? dispatch(updateSupplierSuccess(supplier)) : dispatch(createSupplierSuccess(supplier)))
+			.catch((err) => {
+				throw(err);
+			});
 	};
 }
 
