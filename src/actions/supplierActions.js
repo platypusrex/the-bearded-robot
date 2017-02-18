@@ -1,5 +1,6 @@
 import * as types from './actionTypes';
-import supplierApi from '../api/mockSupplierApi';
+
+const baseApiUrl = 'http://localhost:3000/suppliers';
 
 export function loadSuppliersSuccess(suppliers) {
 	return { type: types.LOAD_SUPPLIERS_SUCCESS, suppliers};
@@ -19,7 +20,7 @@ export function deleteSupplierSuccess(supplier) {
 
 export function loadSuppliers() {
 	return function(dispatch) {
-		return fetch(`http://localhost:3000/suppliers`)
+		return fetch(baseApiUrl)
 			.then(res => res.json())
 			.then(suppliers => dispatch(loadSuppliersSuccess(suppliers)))
 			.catch((err) => {
@@ -29,7 +30,7 @@ export function loadSuppliers() {
 }
 
 export function saveSupplier(supplier) {
-	const apiUrl = `http://localhost:3000/suppliers${(supplier._id) ? '/' + supplier._id : ''}`;
+	const apiUrl = `${baseApiUrl}${(supplier._id) ? '/' + supplier._id : ''}`;
 	const fetchOptions = {
 		method: (supplier._id) ? 'PUT' : 'POST',
 		mode: 'cors',
@@ -51,7 +52,7 @@ export function saveSupplier(supplier) {
 }
 
 export function deleteSupplier(supplier) {
-	const apiUrl = `http://localhost:3000/suppliers/${supplier._id}`;
+	const apiUrl = `${baseApiUrl}/${supplier._id}`;
 	const fetchOptions = {
 		method: 'DELETE',
 		mode: 'cors'
