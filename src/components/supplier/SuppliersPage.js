@@ -47,7 +47,7 @@ class SuppliersPage extends React.Component {
 		let suppliers = this.props.suppliers;
 
 		return suppliers.filter(supplier => {
-			return supplier.id === supplierId;
+			return supplier._id === supplierId;
 		})[0];
 	}
 

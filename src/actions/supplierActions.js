@@ -51,11 +51,20 @@ export function saveSupplier(supplier) {
 }
 
 export function deleteSupplier(supplier) {
+	const apiUrl = `http://localhost:3000/suppliers/${supplier._id}`;
+	const fetchOptions = {
+		method: 'DELETE',
+		mode: 'cors'
+	};
+
 	return function(dispatch) {
-		return supplierApi.deleteSupplier(supplier).then(supplier => {
-			dispatch(deleteSupplierSuccess(supplier));
-		}).catch((error) => {
-			throw(error);
-		});
+		return fetch(apiUrl, fetchOptions)
+			.then(res => res.json())
+			.then((supplier) => {
+				dispatch(deleteSupplierSuccess(supplier));
+			})
+			.catch((err) => {
+				throw(err);
+			});
 	};
 }
