@@ -34,12 +34,21 @@ export function loadSuppliers() {
 }
 
 export function saveSupplier(supplier) {
+	const apiUrl = `http://localhost:3000/suppliers${(supplier._id) ? '/' + supplier._id : ''}`;
+	const fetchOptions = {
+		method: (supplier._id) ? 'PUT' : 'POST',
+		mode: 'cors',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(supplier)
+	};
+
 	return function(dispatch) {
-		return supplierApi.saveSupplier(supplier).then(savedSupplier => {
-			supplier.id ? dispatch(updateSupplierSuccess(savedSupplier)) : dispatch(createSupplierSuccess(savedSupplier));
-		}).catch((error) => {
-			throw(error);
-		});
+		return fetch(apiUrl, fetchOptions)
+			.then(res => res.json())
+			.then(supplier => (supplier._id) ? dispatch(updateSupplierSuccess(supplier)) : dispatch(createSupplierSuccess(supplier)));
 	};
 }
 

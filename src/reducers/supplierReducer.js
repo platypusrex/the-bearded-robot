@@ -8,7 +8,7 @@ export default function supplierReducer(state = initialState.suppliers, action) 
 
 		case types.UPDATE_SUPPLIER_SUCCESS:
 			return [
-				...state.filter(supplier => supplier.id !== action.supplier.id),
+				...state.filter(supplier => supplier._id !== action.supplier._id),
 				Object.assign({}, action.supplier)
 			];
 
